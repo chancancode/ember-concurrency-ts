@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "allowJs": true,
     "target": "es2020",
     "module": "es2020",
     "noEmit": true,
@@ -8,13 +9,25 @@
     "noUnusedParameters": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
+    "isolatedModules": true,
     "moduleResolution": "node",
     "baseUrl": "./",
     "paths": {
       "ember-concurrency-ts": ["."],
-      "ember-concurrency-ts/*": ["./*"]
+      "ember-concurrency-ts/*": ["./*"],
+      "dummy/tests/*": ["tests/*"],
+      "dummy/*": ["tests/dummy/app/*", "app/*"],
+      "*": ["./types/*"]
     },
     "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true
-  }
+  },
+  "include": [
+    "app/**/*",
+    "addon/**/*",
+    "tests/**/*",
+    "types/**/*",
+    "test-support/**/*",
+    "addon-test-support/**/*"
+  ]
 }

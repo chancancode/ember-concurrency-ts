@@ -83,6 +83,22 @@ module.exports = async function() {
             edition: 'classic'
           }
         }
+      },
+      {
+        name: 'typescript-3.7',
+        npm: {
+          devDependencies: {
+            'typescript': '~3.7.0'
+          }
+        }
+      },
+      {
+        name: 'typescript-3.9',
+        npm: {
+          devDependencies: {
+            'typescript': '~3.9.0'
+          }
+        }
       }
     ]
   };
