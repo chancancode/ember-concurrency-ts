@@ -199,4 +199,86 @@ module('Integration | ember-concurrency-ts', function(hooks) {
     assert.dom('#value').hasText('Done!');
     assert.dom('#resolved').hasText('Wow!');
   });
+
+  test('it works at assignment', async function(assert) {
+    let { promise, resolve } = defer<string>();
+
+    class MyComponent extends Component {
+      resolved: string | null = null;
+      lastValue: string | null = null;
+
+      @task myTask = taskFor(function*(this: MyComponent, arg: string): TaskGenerator<string> {
+        set(this, 'resolved', yield promise);
+        return arg;
+      });
+
+      _() {
+        expectTypeOf(this.myTask).toMatchTypeOf<Task<unknown, unknown[]>>();
+      }
+
+      @computed('myTask.performCount')
+      get isWaiting(): boolean {
+        expectTypeOf(this.myTask.performCount).toEqualTypeOf<number>();
+        return this.myTask.performCount === 0;
+      }
+
+      @computed('myTask.isRunning')
+      get isRunning(): boolean {
+        expectTypeOf(this.myTask.isRunning).toEqualTypeOf<boolean>();
+        return this.myTask.isRunning;
+      }
+
+      @computed('myTask.last.value')
+      get value(): string | null | undefined {
+        expectTypeOf(this.myTask.last).toEqualTypeOf<TaskInstance<string> | null>();
+        expectTypeOf(this.myTask.last!.value).toEqualTypeOf<string | null>();
+        return this.myTask.last?.value;
+      }
+
+      @action performMyTask(arg: string) {
+        this.myTask.perform(arg).then(value => {
+          expectTypeOf(value).toEqualTypeOf<string>();
+          set(this, 'lastValue', value);
+        });
+      }
+    }
+
+    this.owner.register('component:test', MyComponent);
+
+    this.owner.register('template:components/test', hbs`
+      {{#if this.isWaiting}}
+        <button id="start" {{on "click" (fn this.performMyTask "Done!")}}>Start!</button>
+      {{else if this.isRunning}}
+        Running!
+      {{else}}
+        Finished!
+        <span id="state">{{this.myTask.state}}</span>
+        <span id="value">{{this.value}}</span>
+        <span id="resolved">{{this.resolved}}</span>
+      {{/if}}
+    `);
+
+    await render(hbs`<Test />`);
+
+    assert.dom('button#start').hasText('Start!');
+    assert.dom().doesNotContainText('Running!');
+    assert.dom().doesNotContainText('Finished!');
+
+    await click('button#start');
+
+    assert.dom('button#start').doesNotExist();
+    assert.dom().containsText('Running!');
+    assert.dom().doesNotContainText('Finished!');
+
+    resolve('Wow!');
+
+    await settled();
+
+    assert.dom('button#start').doesNotExist();
+    assert.dom().doesNotContainText('Running!');
+    assert.dom().containsText('Finished!');
+    assert.dom('#state').hasText('idle');
+    assert.dom('#value').hasText('Done!');
+    assert.dom('#resolved').hasText('Wow!');
+  });
 });
