@@ -3,19 +3,16 @@ import {
   TaskInstance,
   TaskFunction as GenericTaskFunction,
   TaskFunctionArgs as Args,
-  TaskFunctionReturnType as Return,
+  TaskForTaskFunction as TaskFor,
+  TaskInstanceForTaskFunction as InstanceFor,
   EncapsulatedTaskDescriptor as GenericDescriptor,
   EncapsulatedTaskDescriptorArgs as DescriptorArgs,
-  EncapsulatedTaskDescriptorReturnType as DescriptorReturn
+  TaskForEncapsulatedTaskDescriptor as TaskForDescriptor,
+  TaskInstanceForEncapsulatedTaskDescriptor as InstanceForDescriptor
 } from 'ember-concurrency';
 
 type TaskFunction = GenericTaskFunction<any, any[]>;
-type TaskFor<T extends TaskFunction> = Task<Return<T>, Args<T>>;
-type InstanceFor<T extends TaskFunction> = TaskInstance<Return<T>>;
-
 type Descriptor = GenericDescriptor<any, any[]>;
-type TaskForDescriptor<T extends Descriptor> = Task<DescriptorReturn<T>, DescriptorArgs<T>>;
-type InstanceForDescriptor<T extends Descriptor> = TaskInstance<DescriptorReturn<T>>;
 
 /**
  * No-op typecast function that turns what TypeScript believes to be a
