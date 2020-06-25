@@ -151,6 +151,65 @@ Based on the return type of `*myTask`, TypeScript knows that `myTask.value` is
 arguments as `*myTask`. Passing the wrong arguments will be a type error. It
 also knows that the `value` promise callback parameter is a `string`.
 
+#### Alternate usage of `taskFor`
+
+The `taskFor` utility function can also be used at assignment:
+
+```ts
+import { action } from '@ember/object';
+import Component from '@glimmer/component';
+import { TaskGenerator, timeout } from 'ember-concurrency';
+import { task } from 'ember-concurrency-decorators';
+import { taskFor } from 'ember-concurrency-ts';
+
+export default class extends Component {
+  @task myTask = taskFor(function*(ms: number): TaskGenerator<string> {
+    yield timeout(ms);
+    return 'done!';
+  });
+
+  @action performTask() {
+    if (this.myTask.isRunning) {
+      return;
+    }
+
+    this.myTask.perform(1000).then(value => {
+      console.log(value.toUpperCase());
+    });
+  }
+}
+```
+
+This allows you to access the task directly without using `taskFor` and `perform`. The one
+caveat here is that the `this` type must be asserted if you are referencing `this` in your task:
+
+```ts
+import { action } from '@ember/object';
+import Component from '@glimmer/component';
+import { TaskGenerator, timeout } from 'ember-concurrency';
+import { task } from 'ember-concurrency-decorators';
+import { taskFor } from 'ember-concurrency-ts';
+
+export default class MyComponent extends Component {
+  returnVal = 'done';
+
+  @task myTask = taskFor(function*(this: MyComponent, ms: number): TaskGenerator<string> {
+    yield timeout(ms);
+    return this.returnVal;
+  });
+
+  @action performTask() {
+    if (this.myTask.isRunning) {
+      return;
+    }
+
+    this.myTask.perform(1000).then(value => {
+      console.log(value.toUpperCase());
+    });
+  }
+}
+```
+
 ### `perform`
 
 As a convenience, this addon also provide a `perform` utility function as a
