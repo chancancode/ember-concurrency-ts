@@ -113,6 +113,9 @@ module('Integration | ember-concurrency-ts', function(hooks) {
       @task myTask = {
         resolved: '',
         *perform(arg: string): TaskGenerator<string> {
+          expectTypeOf(this).not.toBeAny();
+          expectTypeOf(this.resolved).not.toBeAny();
+          expectTypeOf(this.resolved).toBeString();
           set(this, 'resolved', yield promise);
           return arg;
         }
