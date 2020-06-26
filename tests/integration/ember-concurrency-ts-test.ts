@@ -208,6 +208,9 @@ module('Integration | ember-concurrency-ts', function(hooks) {
       lastValue: string | null = null;
 
       @task myTask = taskFor(function*(this: MyComponent, arg: string): TaskGenerator<string> {
+        expectTypeOf(this).not.toBeAny();
+        expectTypeOf(this.resolved).not.toBeAny();
+        expectTypeOf(this.resolved).toMatchTypeOf<string | null>();
         set(this, 'resolved', yield promise);
         return arg;
       });
@@ -291,6 +294,9 @@ module('Integration | ember-concurrency-ts', function(hooks) {
       @task myTask = taskFor({
         resolved: '',
         *perform(arg: string): TaskGenerator<string> {
+          expectTypeOf(this).not.toBeAny();
+          expectTypeOf(this.resolved).not.toBeAny();
+          expectTypeOf(this.resolved).toBeString();
           set(this, 'resolved', yield promise);
           return arg;
         }
