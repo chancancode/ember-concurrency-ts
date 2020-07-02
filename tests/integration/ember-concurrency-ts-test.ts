@@ -10,13 +10,15 @@ import {
   TaskInstance,
   EncapsulatedTask,
   EncapsulatedTaskDescriptor,
-  EncapsulatedTaskInstance,
+  EncapsulatedTaskState,
 } from 'ember-concurrency';
 import { task } from 'ember-concurrency-decorators';
 import { taskFor, perform } from 'ember-concurrency-ts';
 import { expectTypeOf } from 'expect-type';
 import Component from '@glimmer/component';
 import { defer } from 'dummy/tests/utils';
+
+type EncapsulatedTaskInstance<T, State extends object> = TaskInstance<T> & EncapsulatedTaskState<State>;
 
 module('Integration | ember-concurrency-ts', function(hooks) {
   setupRenderingTest(hooks);
