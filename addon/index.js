@@ -3,7 +3,7 @@ import { assert } from '@ember/debug';
 export function taskFor(task) {
   assert(
     `${task} does not appear to be a task!`,
-    task && typeof task.perform === 'function'
+    task && (typeof task === 'function' || typeof task.perform === 'function')
   );
 
   return task;
