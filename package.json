@@ -27,7 +27,7 @@
     "ember-cli-htmlbars": "^4.3.1"
   },
   "peerDependencies": {
-    "ember-concurrency": "^1.2.1",
+    "ember-concurrency": "^1.2.1 || ^2.0.0-rc.1",
     "ember-concurrency-decorators": "^2.0.0"
   },
   "devDependencies": {
