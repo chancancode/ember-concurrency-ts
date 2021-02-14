@@ -1,6 +1,6 @@
 {
   "name": "ember-concurrency-ts",
-  "version": "0.2.0",
+  "version": "0.2.2",
   "description": "TypeScript utilities for ember-concurrency",
   "keywords": [
     "ember-addon"
