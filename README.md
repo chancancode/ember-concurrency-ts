@@ -58,7 +58,10 @@ Compatibility
 * Ember.js v3.12 or above
 * Ember CLI v2.13 or above
 * Node.js v10 or above
-* TypeScript 3.7 or 3.9
+* TypeScript 3.7, 3.9 or 4.*
+
+**NOTE:** if you use [ember-concurrency][e-c] v1.*, you should use v0.2 version
+of this package.
 
 
 Installation
@@ -89,7 +92,6 @@ check:
 import { action } from '@ember/object';
 import Component from '@glimmer/component';
 import { task, TaskGenerator, timeout } from 'ember-concurrency';
-import { task } from 'ember-concurrency-decorators';
 import { taskFor } from 'ember-concurrency-ts';
 
 export default class extends Component {
@@ -118,8 +120,7 @@ the code will still type check:
 ```ts
 import { action } from '@ember/object';
 import Component from '@glimmer/component';
-import { TaskGenerator, timeout } from 'ember-concurrency';
-import { task } from 'ember-concurrency-decorators';
+import { task, TaskGenerator, timeout } from 'ember-concurrency';
 import { taskFor } from 'ember-concurrency-ts';
 
 export default class extends Component {
@@ -155,8 +156,7 @@ The `taskFor` utility function can also be used at assignment:
 ```ts
 import { action } from '@ember/object';
 import Component from '@glimmer/component';
-import { TaskGenerator, timeout } from 'ember-concurrency';
-import { task } from 'ember-concurrency-decorators';
+import { task, TaskGenerator, timeout } from 'ember-concurrency';
 import { taskFor } from 'ember-concurrency-ts';
 
 export default class extends Component {
@@ -183,8 +183,7 @@ caveat here is that the `this` type must be asserted if you are referencing `thi
 ```ts
 import { action } from '@ember/object';
 import Component from '@glimmer/component';
-import { TaskGenerator, timeout } from 'ember-concurrency';
-import { task } from 'ember-concurrency-decorators';
+import { task, TaskGenerator, timeout } from 'ember-concurrency';
 import { taskFor } from 'ember-concurrency-ts';
 
 export default class MyComponent extends Component {
@@ -215,8 +214,7 @@ shorthand for `myTask(...).perform(...)`:
 ```ts
 import { action } from '@ember/object';
 import Component from '@glimmer/component';
-import { TaskGenerator, timeout } from 'ember-concurrency';
-import { task } from 'ember-concurrency-decorators';
+import { task, TaskGenerator, timeout } from 'ember-concurrency';
 import { perform } from 'ember-concurrency-ts';
 
 export default class extends Component {
@@ -244,8 +242,7 @@ the [Installation](#installation) section for additional instructions.
 ```ts
 import { action } from '@ember/object';
 import Component from '@glimmer/component';
-import { timeout } from 'ember-concurrency';
-import { task } from 'ember-concurrency-decorators';
+import { task, timeout } from 'ember-concurrency';
 import { taskFor, perform } from 'ember-concurrency-ts';
 
 export default class extends Component {
