@@ -57,7 +57,7 @@ Compatibility
 * [ember-concurrency-async][e-c-async] 0.2.0 or above (optional)
 * Ember.js v3.16 or above
 * Ember CLI v2.13 or above
-* Node.js v10 or above
+* Node.js v12 or above
 * TypeScript 3.7, 3.9 or 4.*
 
 **NOTE:** if you use [ember-concurrency][e-c] v1.*, you should use v0.2 version
