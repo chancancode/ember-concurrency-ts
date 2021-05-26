@@ -5,6 +5,7 @@ import { action, computed, set } from '@ember/object';
 import { click, render, settled } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
 import {
+  task,
   Task,
   TaskGenerator,
   TaskInstance,
@@ -12,7 +13,6 @@ import {
   EncapsulatedTaskDescriptor,
   EncapsulatedTaskState,
 } from 'ember-concurrency';
-import { task } from 'ember-concurrency-decorators';
 import { taskFor, perform } from 'ember-concurrency-ts';
 import { expectTypeOf } from 'expect-type';
 import Component from '@glimmer/component';
