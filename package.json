@@ -30,7 +30,7 @@
     "ember-cli-htmlbars": "^5.3.1"
   },
   "peerDependencies": {
-    "ember-concurrency": "^1.2.1 || ^2.0.0-rc.1"
+    "ember-concurrency": "^2.0.0-rc.1"
   },
   "devDependencies": {
     "@ember/optional-features": "^2.0.0",
