@@ -3,14 +3,12 @@ ember-concurrency-ts
 
 TypeScript utilities for [ember-concurrency][e-c].
 
-This is how you would typically write [ember-concurrency][e-c] tasks in Octane
-using [ember-concurrency-decorators][e-c-d]:
+This is how you would typically write [ember-concurrency][e-c] tasks in Octane:
 
 ```ts
 import { action } from '@ember/object';
 import Component from '@glimmer/component';
-import { TaskGenerator, timeout } from 'ember-concurrency';
-import { task } from 'ember-concurrency-decorators';
+import { task, TaskGenerator, timeout } from 'ember-concurrency';
 
 export default class extends Component {
   @task *myTask(ms: number): TaskGenerator<string> {
@@ -55,8 +53,7 @@ details.
 Compatibility
 ------------------------------------------------------------------------------
 
-* [ember-concurrency][e-c] 1.2.0 or above
-* [ember-concurrency-decorators][e-c-d] 2.0.0 or above
+* [ember-concurrency][e-c] 2.0.0 or above
 * [ember-concurrency-async][e-c-async] 0.2.0 or above (optional)
 * Ember.js v3.12 or above
 * Ember CLI v2.13 or above
@@ -91,7 +88,7 @@ check:
 ```ts
 import { action } from '@ember/object';
 import Component from '@glimmer/component';
-import { TaskGenerator, timeout } from 'ember-concurrency';
+import { task, TaskGenerator, timeout } from 'ember-concurrency';
 import { task } from 'ember-concurrency-decorators';
 import { taskFor } from 'ember-concurrency-ts';
 
@@ -290,5 +287,4 @@ This project is licensed under the [MIT License](LICENSE.md).
 
 
 [e-c]: https://github.com/machty/ember-concurrency
-[e-c-d]: https://github.com/machty/ember-concurrency-decorators
 [e-c-async]: https://github.com/chancancode/ember-concurrency-async
