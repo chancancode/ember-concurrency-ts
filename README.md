@@ -3,6 +3,8 @@ ember-concurrency-ts
 
 TypeScript utilities for [ember-concurrency][e-c].
 
+*NOTE: [ember-concurrency v2.3.0][e-c-2.3-release] introduces a new async arrow function `task()` API (along with codemods to automatically convert your code to the new style) that is TypeScript-friendly and eliminates most or all of the need for this package (as well as [ember-concurrency-async][e-c-async]).*
+
 This is how you would typically write [ember-concurrency][e-c] tasks in Octane:
 
 ```ts
@@ -285,3 +287,4 @@ This project is licensed under the [MIT License](LICENSE.md).
 
 [e-c]: https://github.com/machty/ember-concurrency
 [e-c-async]: https://github.com/chancancode/ember-concurrency-async
+[e-c-2.3-release]: https://github.com/machty/ember-concurrency/releases/tag/2.3.0
