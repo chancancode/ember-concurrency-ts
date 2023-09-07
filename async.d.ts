@@ -12,12 +12,11 @@ import {
 import { taskFor, perform, Descriptor } from 'ember-concurrency-ts';
 
 type AsyncTaskFunction = GenericAsyncTaskFunction<any, any[]>;
-type AsyncDescriptor = GenericAsyncDescriptor<any, any[]>;
 
 declare module 'ember-concurrency-ts' {
-  function taskFor<T extends AsyncTaskFunction>(task: T): AsyncTaskFor<T>;
+  function taskFor<HostObject, T extends AsyncTaskFunction>(task: T): AsyncTaskFor<HostObject, T>;
   function taskFor<T extends AsyncDescriptor>(task: T): AsyncTaskForDescriptor<T>;
 
-  function perform<T extends AsyncTaskFunction>(task: T, ...args: Args<T>): AsyncInstanceFor<T>;
+  function perform<HostObject, T extends AsyncTaskFunction>(task: T, ...args: Args<T>): AsyncInstanceFor<HostObject, T>;
   function perform<T extends AsyncDescriptor>(task: T, ...args: DescriptorArgs<T>): AsyncInstanceForDescriptor<T>;
 }
